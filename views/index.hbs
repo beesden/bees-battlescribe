@@ -1,0 +1,11 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+<dl class="refernce-list">
+{{#each categories}}
+	<dt>{{category}}</dt>
+	{{#each rules}}
+		<dd><a href="/reference/{{../category}}/{{id this}}">{{this}}</dd>
+	{{/each}}
+{{/each}}
+</dl>

@@ -1,0 +1,27 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+{{#each config.gameSystem.profileTypes}}
+	{{#each profileType}}
+		<table class="grid-item">
+			<caption>{{$.name}}</caption>
+			<thead>
+				<tr>
+					<th></th>
+					{{#each characteristicTypes}}
+						{{#each characteristicType}}
+							<th>{{$.name}}</th>
+						{{/each}}
+					{{/each}}
+				</tr>
+			</thead>
+			<tbody>
+				{{#each ../../profiles}}
+					{{#if_eq $.profileTypeId ../$.id}}
+						{{> profile this }}
+					{{/if_eq}}
+				{{/each}}
+			</tbody>
+		</table>
+	{{/each}}
+{{/each}}
