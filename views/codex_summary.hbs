@@ -29,11 +29,16 @@
 
 <script>
 	{
-		document.querySelectorAll('tbody').forEach(tbody => {
-			if (!tbody.children.length) {
-				tbody.parentNode.style.display = 'none'
-			}
-		});
+	    const toggleBoxes = function() {
+			document.querySelectorAll('tbody').forEach(tbody => {
+			    let target = tbody.parentNode;
+				if (!tbody.children.length) {
+					target.style.display = 'none';
+				} else {
+					target.style.removeProperty('display');
+				}
+			});
+		}
 
 		document.addEventListener("DOMContentLoaded", function () {
 			const bookFilters = new Map();
@@ -66,10 +71,13 @@
 					filter.addEventListener('click', function () {
 						filter.classList.toggle('toggle');
 						val.forEach((el) => filter.classList.contains('toggle') ? el.parentStore.appendChild(el) : el.parentStore.removeChild(el))
+						toggleBoxes();
 					});
 					bookFilterWrap.appendChild(filter);
 				});
 			}
+
+			toggleBoxes();
 		});
 
 	}
