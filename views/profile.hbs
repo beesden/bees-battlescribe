@@ -1,8 +1,8 @@
-<tr>
+<tr data-filter-book="{{$.book}}">
 	<td>{{$.name}}</td>
-	{{#each characteristics}}
+	{{#each profile.characteristics}}
 		{{#each characteristic}}
-			<td>{{$.value}}</td>
+			<td data-type="{{$.name}}">{{$.value}}</td>
 		{{/each}}
 	{{/each}}
 </tr>

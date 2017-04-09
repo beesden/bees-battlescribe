@@ -18,6 +18,7 @@ router.get('/:gameId/:armyId/:view?', function (request, response) {
     response.render(`codex_${request.params.view || 'entries'}`, {
         catalogue: data.getCatalogue(request.params.gameId, armyId),
         config: data.config,
+        params: request.params,
         title: armyId
     });
 });

@@ -2,28 +2,30 @@
 
 {{> nav}}
 
-{{#each config.gameSystem.profileTypes}}
-	{{#each profileType}}
-		<table class="grid-item">
-			<caption>{{$.name}}</caption>
-			<thead>
-				<tr>
-					<th></th>
-					{{#each characteristicTypes}}
-						{{#each characteristicType}}
-							<th>{{$.name}}</th>
+<section class="codex-summary">
+	{{#each config.gameSystem.profileTypes}}
+		{{#each profileType}}
+			<table class="grid-item">
+				<caption>{{$.name}}</caption>
+				<thead>
+					<tr>
+						<th></th>
+						{{#each characteristicTypes}}
+							{{#each characteristicType}}
+								<th data-type="{{$.name}}">{{$.name}}</th>
+							{{/each}}
 						{{/each}}
+					</tr>
+				</thead>
+				<tbody>
+					{{#each (filterProfiles ../../catalogue.profiles $.id)}}
+						{{> profile profile=this type=../$.id }}
 					{{/each}}
-				</tr>
-			</thead>
-			<tbody>
-				{{#each (filterProfiles ../../catalogue.profiles $.id)}}
-					{{> profile this }}
-				{{/each}}
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+		{{/each}}
 	{{/each}}
-{{/each}}
+</section>
 
 <script>
 	{
@@ -32,5 +34,43 @@
 				tbody.parentNode.style.display = 'none'
 			}
 		});
+
+		document.addEventListener("DOMContentLoaded", function () {
+			const bookFilters = new Map();
+
+			document.querySelectorAll('[data-filter-book]').forEach(filterNode => {
+				let book = filterNode.dataset.filterBook;
+
+				if (!bookFilters.get(book)) {
+					bookFilters.set(book, []);
+				}
+
+				filterNode.parentStore = filterNode.parentNode;
+				filterNode.parentStore.removeChild(filterNode);
+				bookFilters.get(book).push(filterNode);
+			});
+
+			let filters = document.querySelector('.codex-filters');
+
+			if (filters) {
+				let bookFilterWrap = document.createElement('dl');
+				filters.appendChild(bookFilterWrap);
+
+				let bookFilterTitle = document.createElement('dt');
+				bookFilterTitle.innerHTML = 'Filter by Book';
+				bookFilterWrap.appendChild(bookFilterTitle);
+
+				bookFilters.forEach((val, key) => {
+					let filter = document.createElement('dd');
+					filter.innerHTML = `${key} (${val.length})`;
+					filter.addEventListener('click', function () {
+						filter.classList.toggle('toggle');
+						val.forEach((el) => filter.classList.contains('toggle') ? el.parentStore.appendChild(el) : el.parentStore.removeChild(el))
+					});
+					bookFilterWrap.appendChild(filter);
+				});
+			}
+		});
+
 	}
 </script>

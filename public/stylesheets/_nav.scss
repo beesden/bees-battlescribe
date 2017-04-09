@@ -1,0 +1,23 @@
+.codex-nav {
+  @include no-print();
+  background: rgba(#151515, 0.8);
+
+  ul {
+    display: flex;
+    list-style: none;
+  }
+
+  a {
+    @include title-font();
+    color: #fff;
+    display: block;
+    font-size: 1.3rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+
+    &:hover {
+      background: #666;
+    }
+  }
+
+}

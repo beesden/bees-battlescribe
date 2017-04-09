@@ -1,0 +1,28 @@
+.breadcrumb {
+  @include title-font();
+  @include no-print();
+  background: rgba(#fff, 0.8);
+  box-shadow: 0 3px 3px rgba(#000, 0.3);
+  display: flex;
+  list-style: none;
+  font-size: 1.1rem;
+  margin: 0 0 1rem;
+  padding: 1rem;
+
+  li {
+    a {
+      color: #444;
+      text-decoration: none;
+      position: relative;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    + li:before {
+      content: '>';
+      margin: 0 0.5rem;
+    }
+  }
+}

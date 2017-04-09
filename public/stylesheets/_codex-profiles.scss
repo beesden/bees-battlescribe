@@ -1,0 +1,54 @@
+.codex-summary {
+  columns: 2;
+  column-gap: 3rem;
+}
+
+table {
+  @include printable();
+  -webkit-column-break-inside: avoid;
+  background: rgba(#fff, 0.9);
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.4);
+  margin: 0 0 2rem;
+  width: 100%;
+
+  caption {
+    font: 1.8rem Casanti;
+    padding: 1rem;
+    text-align: left;
+  }
+
+  thead {
+    display: table-row-group;
+  }
+
+  th, td {
+    min-width: 30px;
+    padding: 0.2rem 0.5rem;
+    text-align: center;
+
+    &:first-child {
+      text-align: left;
+    }
+
+    &:last-child {
+      text-align: left;
+      word-break: break-word;
+    }
+  }
+
+  th {
+    border-bottom: 2px solid #000;
+    font-weight: 700;
+  }
+
+  [data-type="Unit Type"] {
+    display: none;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #d1d2d4;
+  }
+}

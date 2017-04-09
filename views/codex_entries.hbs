@@ -2,17 +2,46 @@
 
 {{> nav}}
 
-<ul>
-	{{#each catalogue}}
-		{{#if_eq $.type 'unit'}}
-			<li>
-				<h1>{{$.name}}</h1>
+{{#each catalogue.entries}}
+	{{#if_eq $.type 'unit'}}
+		<article class="codex-entry">
+			<h1>{{$.name}}</h1>
 
-				<table class="grid-item">
-					{{> entries entries=this profiles=../profiles}}
-				</table>
+			{{#if_eq $.name 'Tactical Squad'}}
+				<script>console.log({{{json this}}})</script>
+			{{/if_eq}}
 
-			</li>
-		{{/if_eq}}
-	{{/each}}
-</ul>
+			{{#each ../config.gameSystem.profileTypes}}
+				{{#each profileType}}
+					<table class="grid-item">
+						<caption>{{$.name}}</caption>
+						<thead>
+							<tr>
+								<th></th>
+								{{#each characteristicTypes}}
+									{{#each characteristicType}}
+										<th>{{$.name}}</th>
+									{{/each}}
+								{{/each}}
+							</tr>
+						</thead>
+						<tbody>
+							{{> entries entries=../../this catalogue=../../../catalogue type=$.id}}
+						</tbody>
+					</table>
+				{{/each}}
+			{{/each}}
+
+		</article>
+	{{/if_eq}}
+{{/each}}
+
+<script>
+	{
+		document.querySelectorAll('tbody').forEach(tbody => {
+			if (!tbody.children.length) {
+				tbody.parentNode.style.display = 'none'
+			}
+		});
+	}
+</script>

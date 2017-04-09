@@ -1,32 +1,40 @@
 {{#each entries.entryLinks}}
 	{{#each entryLink}}
-		{{> entries (get  $.targetId ../../lookup.entries)}}
+		{{> entries entries=(get ../../catalogue.entries $.targetId ) catalogue=../../catalogue type=../../type}}
 	{{/each}}
 {{/each}}
 
 {{#each entries.infoLinks}}
 	{{#each infoLink}}
-		{{> entries entries=this lookup=../../lookup}}
+		{{> entries entries=this catalogue=../../catalogue}}
 		{{#if_eq $.type 'profile'}}
-			{{> profile (get ../../profiles $.targetId)}}
+			{{#if (get ../../catalogue.profiles $.targetId)}}
+				{{#if_eq $.type ../../../type}}
+					{{> profile (get ../../catalogue.profiles $.targetId)}}
+				{{/if_eq}}
+			{{/if}}
 		{{/if_eq}}
 	{{/each}}
 {{/each}}
 
 {{#each entries.selectionEntries}}
 	{{#each selectionEntry}}
-		{{> entries entries=this profiles=../../profiles}}
+		{{> entries entries=this catalogue=../../catalogue type=../../type}}
 	{{/each}}
 {{/each}}
 
 {{#each entries.selectionEntryGroups}}
 	{{#each selectionEntryGroup}}
-		{{> entries entries=this profiles=../../profiles}}
+		{{> entries entries=this catalogue=../../catalogue type=../../type}}
 	{{/each}}
 {{/each}}
 
 {{#each entries.profiles}}
 	{{#each profile}}
-		{{> profile this}}
+		{{#if (get ../../catalogue.profiles $.targetId)}}
+			{{#if_eq $.type ../../../type}}
+				{{> profile (get ../../catalogue.profiles $.targetId)}}
+			{{/if_eq}}
+		{{/if}}
 	{{/each}}
 {{/each}}

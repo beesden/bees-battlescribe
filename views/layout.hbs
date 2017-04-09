@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    {{{body}}}
-  </body>
+<head>
+	<title>{{title}}</title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+
+	<ul class="breadcrumb">
+		<li>
+			<a href="/">Home</a>
+		</li>
+		{{#if params.gameId}}
+			<li>
+				<a href="/{{gameId}}">{{config.gameSystem.$.name}}</a>
+			</li>
+			{{#if params.armyId}}
+				<li>
+					<a href="/{{../this}}/{{params.armyId}}">{{catalogue.data.$.name}}</a>
+				</li>
+			{{/if}}
+		{{/if}}
+	</ul>
+	{{{body}}}
+</body>
 </html>

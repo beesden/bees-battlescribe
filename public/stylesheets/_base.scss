@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font: 13px/1.3 Verdana, Geneva, sans-serif;
+
+  @media print {
+    font-size: 8px;
+  }
+}
+
+body {
+  background: url('../images/textured_paper.png');
+  overflow-y: scroll;
+  padding: 0 2rem 3rem;
+
+  @media print {
+    background: none;
+    padding: 0;
+  }
+}
+
+.error {
+  border: 1px solid #edd;
+  background: #fee;
+  padding: 1rem;
+}
+
+@mixin no-print() {
+  @media print {
+    display: none;
+  }
+}
+
+@mixin printable() {
+  @media print {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+}

@@ -2,7 +2,9 @@
 
 <p>This sometimes happens when parsing the data. Simply try again.</p>
 
-<button class="retry" onclick="location.reload()">Retry</button>
+{{#unless error.stack}}
+	<script>location.reload()</script>
+{{/unless}}
 
 <div class="error">
 	<h2>{{error.status}}</h2>

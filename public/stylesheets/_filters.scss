@@ -1,0 +1,45 @@
+.codex-filters {
+  @include no-print();
+  background: rgba(#fff, 0.8);
+  border-bottom: 4px solid #ccc;
+  padding: 1rem;
+  margin: 0 0 1rem;
+
+  dl {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  dt {
+    @include title-font();
+    flex: 100% 0 0;
+    font-size: 1.2rem;
+    margin-bottom: 0.4em;
+  }
+
+  dd {
+    cursor: pointer;
+    font-size: 0.8rem;
+    flex: 300px 0 0;
+    margin: 0.2em 0;
+
+    &:before {
+      border-radius: 4px;
+      content: '';
+      display: inline-block;
+      margin-right: 0.4em;
+      vertical-align: middle;
+      border: 1px solid #aaa;
+      text-align: center;
+      width: 1.3em;
+      height: 1.3em;
+      transition: background 400ms, content 400ms;
+    }
+
+    &.toggle:before {
+      background: #444;
+      content: '\2714';
+      color: #fff;
+    }
+  }
+}

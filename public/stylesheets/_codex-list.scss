@@ -1,0 +1,38 @@
+.codex-list {
+  display: grid;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  margin: 0 0 1rem;
+
+  .codex {
+    @include printable();
+    background: rgba(#fff, 0.8);
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-shadow: 0 1px 6px rgba(#000, 0.2);
+    padding: 1rem;
+    transition: box-shadow 750ms;
+
+    &:hover {
+      box-shadow: 0 1px 12px rgba(#000, 0.4);
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.6em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      margin: 0 0 0.4em 1em;
+    }
+  }
+}
