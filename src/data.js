@@ -23,7 +23,64 @@ data.getCatalogue = function (path) {
 
 data.config = data.getCatalogue('data/wh40k/Warhammer40k.gst');
 
-data.getFile = function (category, id) {
+data.getEntries = function (category, id) {
+    let catalogue = data.getCatalogue(`data/${category}/${id}.cat`).catalogue;
+    let entries = [];
+
+    try {
+        catalogue.sharedSelectionEntries.forEach((sharedSelectionEntry) => {
+            sharedSelectionEntry.selectionEntry.forEach(entry => {
+                entries = indexEntries(entry, entries)
+            })
+        });
+
+        catalogue.sharedSelectionEntryGroups.forEach((sharedSelectionEntry) => {
+            sharedSelectionEntry.selectionEntryGroup.forEach(entryGroup => {
+                entries = indexEntries(entryGroup, entries)
+            })
+        });
+
+        entries = indexEntries(catalogue, entries);
+    } catch (e) {
+        console.log('error', e)
+    }
+
+    return entries;
+};
+
+const indexEntries = function (data, entries) {
+
+    let lookups = {
+        selectionEntryGroups: 'selectionEntryGroup',
+        rules: 'rule',
+        infoLinks: 'infoLink'
+    };
+
+    Object.entries(lookups).forEach((key, value) => {
+        if (data[key]) {
+            data[key].forEach((entry) => {
+                if (entry && entry[value]) {
+                    entries = indexEntries(entry[value], entries)
+                }
+            });
+        }
+    });
+
+    if (data.selectionEntries) {
+        data.selectionEntries.forEach(entry => {
+            if (entry.selectionEntry) {
+                entry.selectionEntry.forEach(selectionEntry => {
+                    entries = indexEntries(selectionEntry, entries)
+                    entries.push(selectionEntry)
+                })
+            }
+        })
+    }
+
+    return entries;
+};
+
+data.getProfiles = function (category, id) {
     let catalogue = data.getCatalogue(`data/${category}/${id}.cat`).catalogue;
     let profiles = [];
 
@@ -36,17 +93,17 @@ data.getFile = function (category, id) {
 
         catalogue.sharedSelectionEntries.forEach((sharedSelectionEntry) => {
             sharedSelectionEntry.selectionEntry.forEach(entry => {
-                profiles = iterate(entry, profiles)
+                profiles = indexProfiles(entry, profiles)
             })
         });
 
         catalogue.sharedSelectionEntryGroups.forEach((sharedSelectionEntry) => {
             sharedSelectionEntry.selectionEntryGroup.forEach(entryGroup => {
-                profiles = iterate(entryGroup, profiles)
+                profiles = indexProfiles(entryGroup, profiles)
             })
         });
 
-        iterate(catalogue, profiles);
+        indexProfiles(catalogue, profiles);
     } catch (e) {
         console.log('error', e)
     }
@@ -56,7 +113,7 @@ data.getFile = function (category, id) {
     return profiles;
 };
 
-const iterate = function (data, profiles) {
+const indexProfiles = function (data, profiles) {
 
     let lookups = {
         selectionEntries: 'selectionEntry',
@@ -69,7 +126,7 @@ const iterate = function (data, profiles) {
         if (data[key]) {
             data[key].forEach((entry) => {
                 if (entry && entry[value]) {
-                    profiles = iterate(entry[value], profiles)
+                    profiles = indexProfiles(entry[value], profiles)
                 }
             });
         }
@@ -79,7 +136,7 @@ const iterate = function (data, profiles) {
         data.profiles.forEach(profile => {
             if (profile.profile) {
                 profile.profile.forEach(profile => {
-                    profiles = iterate(profile, profiles)
+                    profiles = indexProfiles(profile, profiles)
                     profiles.push(profile)
                 })
             }

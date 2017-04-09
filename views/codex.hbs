@@ -1,0 +1,41 @@
+<h1>{{title}}</h1>
+
+<ul>
+	{{#each catalogue}}
+		{{#if_eq $.type 'unit'}}
+			<li>
+				<h1>{{$.name}}</h1>
+
+				<table class="grid-item">
+					{{> entries entries=this profiles=../profiles}}
+				</table>
+
+			</li>
+		{{/if_eq}}
+	{{/each}}
+</ul>
+
+{{#each config.gameSystem.praofileTypes}}
+	{{#each profileType}}
+		<table class="grid-item">
+			<caption>{{$.name}}</caption>
+			<thead>
+				<tr>
+					<th></th>
+					{{#each characteristicTypes}}
+						{{#each characteristicType}}
+							<th>{{$.name}}</th>
+						{{/each}}
+					{{/each}}
+				</tr>
+			</thead>
+			<tbody>
+				{{#each ../../profiles}}
+					{{#if_eq $.profileTypeId ../$.id}}
+						{{> profile this }}
+					{{/if_eq}}
+				{{/each}}
+			</tbody>
+		</table>
+	{{/each}}
+{{/each}}

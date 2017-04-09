@@ -1,4 +1,3 @@
-const data = require('./data');
 const hbs = require('hbs');
 const fs = require('fs');
 

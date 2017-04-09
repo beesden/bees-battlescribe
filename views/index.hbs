@@ -1,11 +1,20 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
 
-<dl class="refernce-list">
-{{#each categories}}
-	<dt>{{category}}</dt>
-	{{#each rules}}
-		<dd><a href="/reference/{{../category}}/{{id this}}">{{this}}</dd>
+<section class="codex-list">
+	{{#each categories}}
+		{{#each rules}}
+			<article class="codex">
+				<h1 title="{{this}}">{{this}}</h1>
+				<ul>
+					<li>
+						<a href="/{{../category}}/{{id this}}">Codex entries</a>
+					</li>
+					<li>
+						<a href="/{{../category}}/{{id this}}/summary">Rules and profiles</a>
+					</li>
+				</ul>
+			</article>
+		{{/each}}
 	{{/each}}
-{{/each}}
-</dl>
+</section>

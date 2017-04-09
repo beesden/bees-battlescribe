@@ -1,3 +1,8 @@
-<h1>{{message}}</h1>
-<h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
+<h1>An unexpected error has occurred</h1>
+
+<button class="retry" onclick="location.refresh()">Retry</button>
+
+<div class="error">
+	<h2>{{error.status}}</h2>
+	<pre>{{error.stack}}</pre>
+</div>

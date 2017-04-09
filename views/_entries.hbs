@@ -1,0 +1,32 @@
+{{#each entries.entryLinks}}
+	{{#each entryLink}}
+		{{> entries (get  $.targetId ../../lookup.entries)}}
+	{{/each}}
+{{/each}}
+
+{{#each entries.infoLinks}}
+	{{#each infoLink}}
+		{{> entries entries=this lookup=../../lookup}}
+		{{#if_eq $.type 'profile'}}
+			{{> profile (get ../../profiles $.targetId)}}
+		{{/if_eq}}
+	{{/each}}
+{{/each}}
+
+{{#each entries.selectionEntries}}
+	{{#each selectionEntry}}
+		{{> entries entries=this profiles=../../profiles}}
+	{{/each}}
+{{/each}}
+
+{{#each entries.selectionEntryGroups}}
+	{{#each selectionEntryGroup}}
+		{{> entries entries=this profiles=../../profiles}}
+	{{/each}}
+{{/each}}
+
+{{#each entries.profiles}}
+	{{#each profile}}
+		{{> profile this}}
+	{{/each}}
+{{/each}}
