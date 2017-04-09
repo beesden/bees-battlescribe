@@ -3,13 +3,23 @@ const router = express.Router();
 const data = require('./data');
 const fs = require('fs');
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-    res.render('index', {categories: data.categories, title: '40K References'});
+/* List of all army lists for a game */
+router.get('/', function (request, response) {
+    response.render('index', {
+        categories: data.categories,
+        title: '40K References'
+    });
 });
 
-router.get('/:category/:armyId', require('./controller/CodexController'));
-router.get('/:category/:armyId/summary', require('./controller/ProfileController'));
-router.get('/:category/:armyId/catalogue', require('./controller/CatalogueController'));
+// Army list views
+router.get('/:gameId/:armyId/:view?', function (request, response) {
+    let armyId = data.getArmyId(request.params.armyId);
+
+    response.render(`codex_${request.params.view || 'entries'}`, {
+        catalogue: data.getCatalogue(request.params.gameId, armyId),
+        config: data.config,
+        title: armyId
+    });
+});
 
 module.exports = router;

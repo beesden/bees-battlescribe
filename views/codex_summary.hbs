@@ -17,10 +17,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				{{#each ../../profiles}}
-					{{#if_eq $.profileTypeId ../$.id}}
-						{{> profile this }}
-					{{/if_eq}}
+				{{#each (filterProfiles ../../catalogue.profiles $.id)}}
+					{{> profile this }}
 				{{/each}}
 			</tbody>
 		</table>
