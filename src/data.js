@@ -23,6 +23,11 @@ data.getCatalogue = function (path) {
 
 data.config = data.getCatalogue('data/wh40k/Warhammer40k.gst');
 
+
+data.getArmyId = function (id) {
+    return new Buffer(id, 'base64').toString('ascii');
+};
+
 data.getEntries = function (category, id) {
     let catalogue = data.getCatalogue(`data/${category}/${id}.cat`).catalogue;
     let entries = [];
@@ -69,38 +74,40 @@ const indexEntries = function (data, entries) {
     if (data.selectionEntries) {
         data.selectionEntries.forEach(entry => {
             if (entry.selectionEntry) {
-                entry.selectionEntry.forEach(selectionEntry => {
-                    entries = indexEntries(selectionEntry, entries)
-                    entries.push(selectionEntry)
+                    entry.selectionEntry.forEach(selectionEntry => {
+                        entries = indexEntries(selectionEntry, entries)
+                        entries.push(selectionEntry)
+                    })
+                }
+            })
+        }
+
+        return entries;
+    };
+
+    data.getProfiles = function (category, id) {
+        let catalogue = data.getCatalogue(`data/${category}/${id}.cat`).catalogue;
+        let profiles = [];
+
+        try {
+            catalogue.sharedProfiles.forEach((sharedProfile) => {
+                sharedProfile.profile.forEach(profile => {
+                    profiles.push(profile);
+                })
+            });
+
+            catalogue.sharedSelectionEntries.forEach((sharedSelectionEntry) => {
+                sharedSelectionEntry.selectionEntry.forEach(entry => {
+                    profiles = indexProfiles(entry, profiles)
+                })
+            });
+
+            catalogue.sharedSelectionEntryGroups.forEach((sharedSelectionEntry) => {
+            if(!!sharedSelectionEntry.selectionEntryGroup) {
+                sharedSelectionEntry.selectionEntryGroup.forEach(entryGroup => {
+                    profiles = indexProfiles(entryGroup, profiles)
                 })
             }
-        })
-    }
-
-    return entries;
-};
-
-data.getProfiles = function (category, id) {
-    let catalogue = data.getCatalogue(`data/${category}/${id}.cat`).catalogue;
-    let profiles = [];
-
-    try {
-        catalogue.sharedProfiles.forEach((sharedProfile) => {
-            sharedProfile.profile.forEach(profile => {
-                profiles.push(profile);
-            })
-        });
-
-        catalogue.sharedSelectionEntries.forEach((sharedSelectionEntry) => {
-            sharedSelectionEntry.selectionEntry.forEach(entry => {
-                profiles = indexProfiles(entry, profiles)
-            })
-        });
-
-        catalogue.sharedSelectionEntryGroups.forEach((sharedSelectionEntry) => {
-            sharedSelectionEntry.selectionEntryGroup.forEach(entryGroup => {
-                profiles = indexProfiles(entryGroup, profiles)
-            })
         });
 
         indexProfiles(catalogue, profiles);

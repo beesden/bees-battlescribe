@@ -11,5 +11,4 @@ hbs.registerHelper('if_ineq', function (a, b, opts) {
     return a !== b ? opts.fn(this) : opts.inverse(this);
 });
 
-hbs.registerPartial('entries', fs.readFileSync('views/_entries.hbs', 'utf8'));
-hbs.registerPartial('profile', fs.readFileSync('views/_profile.hbs', 'utf8'));
+hbs.registerPartials('views');

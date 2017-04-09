@@ -1,5 +1,6 @@
 <h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+
+{{> nav}}
 
 {{#each config.gameSystem.profileTypes}}
 	{{#each profileType}}
@@ -25,3 +26,13 @@
 		</table>
 	{{/each}}
 {{/each}}
+
+<script>
+	{
+		document.querySelectorAll('tbody').forEach(tbody => {
+			if (!tbody.children.length) {
+				tbody.parentNode.style.display = 'none'
+			}
+		});
+	}
+</script>
