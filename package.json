@@ -1,15 +1,26 @@
 {
-  "name": "bees-warhammer",
-  "version": "0.0.0",
-  "private": true,
+  "name": "@risingstack/rest-api-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "tsc && mocha dist/**/*.spec.js",
+    "lint": "eslint src --ext ts",
+    "tsc": "tsc"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "express": "~4.14.1",
-    "hbs": "~4.0.1",
-    "node-sass-middleware": "0.9.8",
-    "serve-favicon": "~2.3.2",
-    "xml2js": "^0.4.17"
+    "express": "^4.16.4",
+    "nodemon": "^1.18.7",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.12",
+    "tsc": "^1.20150623.0",
+    "typescript": "^3.2.1"
   }
 }

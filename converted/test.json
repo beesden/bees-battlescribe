@@ -1,0 +1,113 @@
+{
+  "selectionEntry": [
+    {
+      "$": {
+        "id": "1b9e-8bef-a40e-9bd0",
+        "name": "Twin lascannon",
+        "hidden": "false",
+        "collective": "false",
+        "type": "upgrade"
+      },
+      "profiles": [
+        null
+      ],
+      "rules": [
+        null
+      ],
+      "infoLinks": [
+        {
+          "infoLink": [
+            {
+              "$": {
+                "id": "3006-91e9-5d00-a78f",
+                "name": "New InfoLink",
+                "hidden": "false",
+                "targetId": "f355-e723-8b2a-1b41",
+                "type": "profile"
+              },
+              "profiles": [
+                null
+              ],
+              "rules": [
+                null
+              ],
+              "infoLinks": [
+                null
+              ],
+              "modifiers": [
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "modifiers": [
+        null
+      ],
+      "constraints": [
+        {
+          "constraint": [
+            {
+              "$": {
+                "field": "selections",
+                "scope": "parent",
+                "value": "2.0",
+                "percentValue": "false",
+                "shared": "true",
+                "includeChildSelections": "false",
+                "includeChildForces": "false",
+                "id": "35c1-70a3-4fcd-c71b",
+                "type": "max"
+              }
+            },
+            {
+              "$": {
+                "field": "selections",
+                "scope": "parent",
+                "value": "2.0",
+                "percentValue": "false",
+                "shared": "true",
+                "includeChildSelections": "false",
+                "includeChildForces": "false",
+                "id": "aa0e-e2aa-838a-60a9",
+                "type": "min"
+              }
+            }
+          ]
+        }
+      ],
+      "categoryLinks": [
+        null
+      ],
+      "selectionEntries": [
+        null
+      ],
+      "selectionEntryGroups": [
+        null
+      ],
+      "entryLinks": [
+        null
+      ],
+      "costs": [
+        {
+          "cost": [
+            {
+              "$": {
+                "name": "pts",
+                "costTypeId": "points",
+                "value": "50.0"
+              }
+            },
+            {
+              "$": {
+                "name": " PL",
+                "costTypeId": "e356-c769-5920-6e14",
+                "value": "0.0"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

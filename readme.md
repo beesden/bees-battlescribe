@@ -1,10 +1,25 @@
-# BattleScribe data viewer
+## Skeleton for Node.js applications written in TypeScript
 
-## Installation:
+### Development
 
-* `npm install`
-* `node bin\www`
+```bash
+npm run dev
+```
 
-## Runs on:
+### Running tests
 
-* `localhost:3000`
+```bash
+npm test
+```
+
+### Linting
+
+```bash
+npm run lint
+```
+
+### Building a container
+
+```bash
+docker build .
+```
