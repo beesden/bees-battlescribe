@@ -21,7 +21,11 @@ table {
   }
 
   thead {
-    display: table-row-group;
+    display: none;
+
+    &:first-of-type {
+      display: table-row-group;
+    }
   }
 
   th, td {
@@ -31,6 +35,7 @@ table {
 
     &:first-child {
       text-align: left;
+      width: 250px;
     }
 
     &:last-child {

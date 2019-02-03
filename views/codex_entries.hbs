@@ -2,38 +2,89 @@
 
 {{> nav}}
 
-{{#each catalogue.entries}}
-	{{#if_eq $.type 'unit'}}
-		<article class="codex-entry">
-			<h1>{{$.name}}</h1>
+<div>
+	<ul>
 
-			{{#if_eq $.name 'Tactical Squad'}}
-				<script>console.log({{{json this}}})</script>
-			{{/if_eq}}
+		{{#each catalogue.units}}
+			<li>
+				{{name}}
+				<ul>
 
-			{{#each ../config.gameSystem.profileTypes}}
-				{{#each profileType}}
-					<table class="grid-item">
-						<caption>{{$.name}}</caption>
-						<thead>
-							<tr>
-								<th></th>
-								{{#each characteristicTypes}}
-									{{#each characteristicType}}
-										<th>{{$.name}}</th>
-									{{/each}}
-								{{/each}}
-							</tr>
-						</thead>
-						<tbody>
-							{{> entries entries=../../this catalogue=../../../catalogue type=$.id}}
-						</tbody>
-					</table>
-				{{/each}}
+					{{#each profiles.units}}
+						<li>
+							{{name}}
+						</li>
+					{{/each}}
+				</ul>
+				<ul>
+
+					{{#each profiles.weapons}}
+						<li>
+							{{name}}
+						</li>
+					{{/each}}
+				</ul>
+				<ul>
+
+					{{#each profiles.wargear}}
+						<li>
+							{{name}}
+						</li>
+					{{/each}}
+				</ul>
+				<ul>
+
+					{{#each profiles.wounds}}
+						<li>
+							{{name}}
+						</li>
+					{{/each}}
+				</ul>
+			</li>
+		{{/each}}
+	</ul>
+</div>
+
+<style>
+	li > ul {
+		margin-left: 1rem;
+	}
+
+	ul + ul {
+		border-top: 1px solid #bbb;
+		padding: .4rem 0;
+		margin: .4rem 1rem;
+	}
+
+	div > ul > li {
+		margin: 0 0 1rem;
+	}
+</style>
+
+{{#each catalogue.units}}
+	<article class="codex-entry">
+		<h1>{{name}}</h1>
+
+		<table class="grid-item">
+			{{#each profiles.units}}
+				<thead>
+					<tr>
+						<th></th>
+						{{#each characteristics}}
+							<th>{{$.name}}</th>
+						{{/each}}
+					</tr>
+				</thead>
+				<tbody>
+					<td>{{name}}</td>
+					{{#each characteristics}}
+						<th>{{$.value}}</th>
+					{{/each}}
+				</tbody>
 			{{/each}}
+		</table>
 
-		</article>
-	{{/if_eq}}
+	</article>
 {{/each}}
 
 <script>

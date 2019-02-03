@@ -10,13 +10,13 @@
 		<li>
 			<a href="/">Home</a>
 		</li>
-		{{#if params.gameId}}
+		{{#if game}}
 			<li>
-				<a href="/{{gameId}}">{{config.gameSystem.$.name}}</a>
+				<a href="/{{game.id}}">{{game.name}}</a>
 			</li>
-			{{#if params.armyId}}
+			{{#if catalogue}}
 				<li>
-					<a href="/{{../this}}/{{params.armyId}}">{{catalogue.data.$.name}}</a>
+					<a href="/{{game.id}}/{{catalogue.id}}">{{catalogue.name}}</a>
 				</li>
 			{{/if}}
 		{{/if}}

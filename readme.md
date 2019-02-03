@@ -8,3 +8,8 @@
 ## Runs on:
 
 * `localhost:3000`
+
+
+## TODO
+
+categoryEntry.$.constraints

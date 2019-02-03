@@ -1,26 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const data = require('./data');
-const fs = require('fs');
+const {getArmyId, getCatalogue, config} = require('./data');
 
 /* List of all army lists for a game */
 router.get('/', function (request, response) {
     response.render('index', {
-        categories: data.categories,
+        categories: [],
         title: '40K References'
     });
 });
 
 // Army list views
-router.get('/:gameId/:armyId/:view?', function (request, response) {
-    let armyId = data.getArmyId(request.params.armyId);
+router.get('/:gameId/:armyId/:view?', async (request, response) => {
 
-    response.render(`codex_${request.params.view || 'entries'}`, {
-        catalogue: data.getCatalogue(request.params.gameId, armyId),
-        config: data.config,
-        params: request.params,
-        title: armyId
-    });
+    const armyId = getArmyId(request.params.armyId);
+
+    const data = {};
+    data.catalogue = await getCatalogue(request.params.gameId, armyId);
+    data.game = await config();
+
+    response.render('codex_entries', data);
 });
 
 module.exports = router;
